@@ -9,9 +9,9 @@ jobs:
       - run: 
           name: Hello  
           command: |
-            echo "Echo environment" 
-            echo "Curl version"
+            echo "Curl version:"
             curl --version
+            echo "Env vars:"
             env
   check-api:
     docker:
@@ -28,3 +28,4 @@ workflows:
   say-hello:
     jobs:
       - hello-job
+      - check-api
