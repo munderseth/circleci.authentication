@@ -9,7 +9,8 @@ jobs:
       - run: 
           name: Hello  
           command: |
-            echo "HELLO there" 
+            echo "Echo environment" 
+            env
 workflows:
   say-hello:
     jobs:
