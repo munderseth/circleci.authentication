@@ -10,7 +10,20 @@ jobs:
           name: Hello  
           command: |
             echo "Echo environment" 
+            echo "Curl version"
+            curl --version
             env
+  check-api:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: API
+          command: |
+            echo "API Call"
+            curl --request GET \
+              --url https://circleci.com/api/v2/project/gh/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/job/${CIRCLE_BUILD_NUM} 
 workflows:
   say-hello:
     jobs:
