@@ -25,8 +25,25 @@ jobs:
             curl --request GET \
               --url https://circleci.com/api/v2/project/gh/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/job/${CIRCLE_BUILD_NUM} \
               --header 'authorization: $CIRCLE_OIDC_TOKEN'
+            echo "API 2 Call"
+            curl --request GET \
+              --url https://circleci.com/api/v2/project/gh/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/job/${CIRCLE_BUILD_NUM} \
+              --header 'authorization: $CIRCLE_OIDC_TOKEN_V2'
+  check-api-fail:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: API
+          command: |
+            echo "API Call"
+            curl --request GET \
+              --url https://circleci.com/api/v2/project/gh/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/job/${CIRCLE_BUILD_NUM} \
+              --header 'authorization: $XYZ'
 workflows:
   say-hello:
     jobs:
       - hello-job
       - check-api
+      - check-api-fail
