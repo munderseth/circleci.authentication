@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run: 
+          name: Hello  
+          command: |
+            echo "HELLO there" 
+workflows:
+  say-hello:
+    jobs:
+      - hello-job
